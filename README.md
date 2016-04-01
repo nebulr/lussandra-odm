@@ -1,7 +1,8 @@
 #Object Document Modeling for Lussandra
 ###Lucene + Cassandra = Lussandra
 _____
-__Take note this module is in Beta. Use at your own risk__
+___Take note this module is in Beta. Use at your own risk___
+
 Instantiate the cassandra client by calling :
 
 `require ('lussandra-odm').init(config);`
