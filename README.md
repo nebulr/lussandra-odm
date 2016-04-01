@@ -11,15 +11,18 @@ Instantiate the cassandra client by calling :
 
 Where your config follows the following format :
 
-`var config = {
+```
+var config = {
     contactPoints : [ '127.0.0.1:9042' ],
     keyspace : 'nana',
     replication : { 'class' : 'SimpleStrategy', 'replication_factor' : 3 }
-};`
+};
+```
 
 An example of the usage :
 
-`var cassandra   = require ('lussandra-odm').client;
+```
+var cassandra   = require ('lussandra-odm').client;
 var uuid        = require ('node-uuid');
 
 var UserModel = cassandra.model ({
@@ -61,11 +64,13 @@ var UserModel = cassandra.model ({
 
 cassandra.sync(UserModel);
 
-module.exports = UserModel;`
+module.exports = UserModel;
+```
 
 and can be used like this :
 
-`var User = require ('user.model');
+```
+var User = require ('user.model');
 
 var user = new User();
 user.email = req.bdy.email;
@@ -88,4 +93,4 @@ user.find ({ email : req.body.email })
     });
 });
 
-`
+```
