@@ -1,7 +1,7 @@
 {
-  "name": "cassandra-odm",
+  "name": "lussandra-odm",
   "version": "1.0.0",
-  "description": "Object Document Modeling for Cassandra",
+  "description": "Object Document Modeling for Lussandra",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -13,7 +13,9 @@
   "keywords": [
     "cassandra-odm",
     "odm",
-    "cassandra"
+    "cassandra",
+    "lussandra",
+    "lussandra-odm"
   ],
   "author": "James A. Meyer",
   "license": "MIT",
