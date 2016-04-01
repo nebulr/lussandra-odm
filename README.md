@@ -17,9 +17,7 @@ Where your config follows the following format :
 
 An example of the usage :
 
-`'use strict';
-
-var cassandra   = require ('lussandra-odm').client;
+`var cassandra   = require ('lussandra-odm').client;
 var uuid        = require ('node-uuid');
 
 var UserModel = cassandra.model ({
@@ -62,3 +60,30 @@ var UserModel = cassandra.model ({
 cassandra.sync(UserModel);
 
 module.exports = UserModel;`
+
+and can be used like this :
+
+`var User = require ('user.model');
+
+var user = new User();
+user.email = req.bdy.email;
+user.setup = false;
+user.insert({})
+.then (function (newUser) {
+  res.json(newUser);
+  next();
+});
+
+var user = new User();
+user.find ({ email : req.body.email })
+.then (function (users) {
+    var foundUser = users[0];
+    foundUser.email = newEmail;
+    foundUser.update({ users[0].id })
+    .then(function(updatedUser) {
+      res.json(updatedUser);
+      next();
+    });
+});
+
+`
