@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nebulr/cassandra-odm.git"
+    "url": "git+https://github.com/nebulr/lussandra-odm.git"
   },
   "keywords": [
     "cassandra-odm",
@@ -20,7 +20,17 @@
   "author": "James A. Meyer",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/nebulr/cassandra-odm/issues"
+    "url": "https://github.com/nebulr/lussandra-odm/issues"
   },
-  "homepage": "https://github.com/nebulr/cassandra-odm#readme"
+  "homepage": "https://github.com/nebulr/lussandra-odm#readme",
+  "dependencies": {
+    "async": "^2.0.0-rc.2",
+    "bluebird": "^3.3.4",
+    "cassandra-driver": "^3.0.1",
+    "cassandra-prom": "0.0.2",
+    "lodash": "^4.8.2",
+    "moment": "^2.12.0",
+    "node-uuid": "^1.4.7",
+    "validate.js": "^0.9.0"
+  }
 }
