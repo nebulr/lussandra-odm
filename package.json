@@ -32,5 +32,9 @@
     "moment": "^2.12.0",
     "node-uuid": "^1.4.7",
     "validate.js": "^0.9.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.4.5"
   }
 }

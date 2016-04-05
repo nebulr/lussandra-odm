@@ -1,6 +1,6 @@
 'use strict';
 
-var cassandrOdm   = require('./lib/cassandra-odm');
+var cassandraOdm   = require('./lib/cassandra-odm');
 var cassandra = null;
 
 exports.init = function (config) {
