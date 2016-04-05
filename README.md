@@ -5,6 +5,8 @@ ___Take note this module is in Beta. Use at your own risk___
 
 This module was made to work with : https://github.com/nebulr/lussandra
 
+Install with `npm install --save lussandra-odm`
+
 Instantiate the cassandra client by calling :
 
 `require ('lussandra-odm').init(config);`
