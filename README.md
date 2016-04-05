@@ -13,15 +13,36 @@ Where your config follows the following format :
 
 ```
 var config = {
-    contactPoints : [ '127.0.0.1:9042' ],
-    keyspace : 'nana',
-    replication : { 'class' : 'SimpleStrategy', 'replication_factor' : 3 }
+    contactPoints : [ '192.168.99.100:9042' ],
+    keyspace : 'somekeyspace',
+    replication : {
+        strategy: 'SimpleStrategy', //Default is 'SimpleStrategy', NOTE: Use 'NetworkTopologyStrategy' for production
+        replication_factor: 1, //Default is 1 (only used with SimpleStrategy). Not used for 'NetworkTopologyStrategy'
+        strategy_options: { //Strategy options is only used for NetworkTopologyStrategy, not for SimpleStrategy
+            '0': 3
+            // '10':3,
+            // '20':3
+        }
+    }
 };
+
+
+require ('lussandra-odm').init (config).then(function () {
+  require ('./routes')(api);
+});
+
+//or
+
+require ('lussandra-odm').init (config).then(function () {
+  var User = require ('user.model'); // Like shown below
+});
+
 ```
 
 An example of the usage :
 
 ```
+// Filename - user.model.js
 var cassandra   = require ('lussandra-odm').client;
 var uuid        = require ('node-uuid');
 

@@ -1,11 +1,17 @@
 'use strict';
 
-var cassandraOdm   = require('./lib/cassandra-odm');
-var cassandra = null;
+var lussandraOdm  = require('./lib/lussandra-odm');
+var Promise       = require ('bluebird')
+var client     = null;
 
 exports.init = function (config) {
-  cassandra = cassandraOdm.createConnection(config);
-  return cassandra;
+  var self = this;
+  return new Promise (function (resolve, reject) {
+    lussandraOdm.createConnection(config).then (function (connection) {
+      self.client = lussandraOdm;
+      resolve (connection);
+    }).catch(reject);
+  });
 };
 
-exports.client = cassandra;
+exports.client = client;
