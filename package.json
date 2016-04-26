@@ -25,7 +25,7 @@
   "homepage": "https://github.com/nebulr/lussandra-odm#readme",
   "dependencies": {
     "async": "^2.0.0-rc.2",
-    "bluebird": "^3.3.4",
+    "bluebird": "^3.3.5",
     "cassandra-driver": "^3.0.1",
     "cassandra-prom": "0.0.2",
     "lodash": "^4.8.2",
