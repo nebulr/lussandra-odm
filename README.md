@@ -17,6 +17,8 @@ Where your config follows the following format :
 var config = {
     contactPoints : [ '192.168.99.100:9042' ],
     keyspace : 'somekeyspace',
+    username : 'someusername',
+    password : 'somepassword',
     replication : {
         strategy: 'SimpleStrategy', //Default is 'SimpleStrategy', NOTE: Use 'NetworkTopologyStrategy' for production
         replication_factor: 1, //Default is 1 (only used with SimpleStrategy). Not used for 'NetworkTopologyStrategy'
