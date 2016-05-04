@@ -1,6 +1,6 @@
 {
   "name": "lussandra-odm",
-  "version": "1.4.3",
+  "version": "1.5.0",
   "description": "Object Document Modeling for Lussandra",
   "main": "index.js",
   "scripts": {
@@ -28,6 +28,7 @@
     "bluebird": "^3.3.5",
     "cassandra-driver": "^3.0.1",
     "cassandra-prom": "0.0.2",
+    "deep-equal": "^1.0.1",
     "lodash": "^4.8.2",
     "moment": "^2.12.0",
     "node-uuid": "^1.4.7",
