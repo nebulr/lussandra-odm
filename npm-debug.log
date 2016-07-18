@@ -1,0 +1,113 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'publish' ]
+2 info using npm@2.14.20
+3 info using node@v4.4.1
+4 verbose publish [ '.' ]
+5 silly cache add args [ '.', null ]
+6 verbose cache add spec .
+7 silly cache add parsed spec Result {
+7 silly cache add   raw: '.',
+7 silly cache add   scope: null,
+7 silly cache add   name: null,
+7 silly cache add   rawSpec: '.',
+7 silly cache add   spec: '/Users/jmeyer/workspace/lussandra-odm',
+7 silly cache add   type: 'directory' }
+8 verbose addLocalDirectory /Users/jmeyer/.npm/lussandra-odm/1.7.4/package.tgz not in flight; packing
+9 verbose correctMkdir /Users/jmeyer/.npm correctMkdir not in flight; initializing
+10 verbose tar pack [ '/Users/jmeyer/.npm/lussandra-odm/1.7.4/package.tgz',
+10 verbose tar pack   '/Users/jmeyer/workspace/lussandra-odm' ]
+11 verbose tarball /Users/jmeyer/.npm/lussandra-odm/1.7.4/package.tgz
+12 verbose folder /Users/jmeyer/workspace/lussandra-odm
+13 info prepublish lussandra-odm@1.7.4
+14 verbose addLocalTarball adding from inside cache /Users/jmeyer/.npm/lussandra-odm/1.7.4/package.tgz
+15 verbose correctMkdir /Users/jmeyer/.npm correctMkdir not in flight; initializing
+16 silly cache afterAdd lussandra-odm@1.7.4
+17 verbose afterAdd /Users/jmeyer/.npm/lussandra-odm/1.7.4/package/package.json not in flight; writing
+18 verbose correctMkdir /Users/jmeyer/.npm correctMkdir not in flight; initializing
+19 verbose afterAdd /Users/jmeyer/.npm/lussandra-odm/1.7.4/package/package.json written
+20 silly publish { name: 'lussandra-odm',
+20 silly publish   version: '1.7.4',
+20 silly publish   description: 'Object Document Modeling for Lussandra',
+20 silly publish   main: 'index.js',
+20 silly publish   scripts: { test: 'echo "Error: no test specified" && exit 1' },
+20 silly publish   repository:
+20 silly publish    { type: 'git',
+20 silly publish      url: 'git+https://github.com/nebulr/lussandra-odm.git' },
+20 silly publish   keywords:
+20 silly publish    [ 'cassandra-odm',
+20 silly publish      'odm',
+20 silly publish      'cassandra',
+20 silly publish      'lussandra',
+20 silly publish      'lussandra-odm' ],
+20 silly publish   author: { name: 'James A. Meyer' },
+20 silly publish   license: 'MIT',
+20 silly publish   bugs: { url: 'https://github.com/nebulr/lussandra-odm/issues' },
+20 silly publish   homepage: 'https://github.com/nebulr/lussandra-odm#readme',
+20 silly publish   dependencies:
+20 silly publish    { async: '^2.0.0-rc.2',
+20 silly publish      bluebird: '^3.3.5',
+20 silly publish      'cassandra-driver': '^3.0.1',
+20 silly publish      'cassandra-prom': '0.0.2',
+20 silly publish      'deep-strict-equal': '^0.1.0',
+20 silly publish      lodash: '^4.8.2',
+20 silly publish      moment: '^2.12.0',
+20 silly publish      'node-uuid': '^1.4.7',
+20 silly publish      'validate.js': '^0.9.0' },
+20 silly publish   devDependencies: { chai: '^3.5.0', mocha: '^2.4.5' },
+20 silly publish   readme: '#Object Document Modeling for Lussandra\n###Lucene + Cassandra = Lussandra\n_____\n___Take note this module is in Beta. Use at your own risk___\n\nThis module was made to work with : https://github.com/nebulr/lussandra\n\nInstall with `npm install --save lussandra-odm`\n\nInstantiate the cassandra client by calling :\n\n`require (\'lussandra-odm\').init(config);`\n\nWhere your config follows the following format :\n\n```\nvar config = {\n    contactPoints : [ \'192.168.99.100:9042\' ],\n    keyspace : \'somekeyspace\',\n    username : \'someusername\',\n    password : \'somepassword\',\n    replication : {\n        strategy: \'SimpleStrategy\', //Default is \'SimpleStrategy\', NOTE: Use \'NetworkTopologyStrategy\' for production\n        replication_factor: 1, //Default is 1 (only used with SimpleStrategy). Not used for \'NetworkTopologyStrategy\'\n        strategy_options: { //Strategy options is only used for NetworkTopologyStrategy, not for SimpleStrategy\n            \'0\': 3\n            // \'10\':3,\n            // \'20\':3\n        }\n    }\n};\n\n\nrequire (\'lussandra-odm\').init (config).then(function () {\n  require (\'./routes\')(api);\n});\n\n//or\n\nrequire (\'lussandra-odm\').init (config).then(function () {\n  var User = require (\'user.model\'); // Like shown below\n});\n\n```\n\nAn example of the usage :\n\n```\n// Filename - user.model.js\nvar cassandra   = require (\'lussandra-odm\').client;\nvar uuid        = require (\'node-uuid\');\n\nvar UserModel = cassandra.model ({\n  email : {\n    type : cassandra.types.TEXT,\n    key_type : cassandra.types.PRIMARY_KEY,\n    key_order : 1\n  },\n  id : {\n    type : cassandra.types.UUID,\n    key_type : cassandra.types.INDEX,\n    key_order : 2\n  },\n  password : { type : cassandra.types.TEXT },\n  salt : { type : cassandra.types.TEXT },\n  account : { type : cassandra.types.TEXT },\n  created : { type : cassandra.types.TIMESTAMP },\n  latitude : { type : cassandra.types.FLOAT },\n  longitude : { type : cassandra.types.FLOAT },\n  accessed : { type : cassandra.types.TIMESTAMP },\n  settings :  { type : cassandra.types.JSONTOTEXT },\n  role : { type : cassandra.types.TEXT },\n  subRole : { type : cassandra.types.TEXT },\n  setup : { type : cassandra.types.BOOLEAN },\n  lucene : { type : cassandra.types.TEXT }\n}, {\n  tableName: \'user\',\n  pre: function(obj) {\n    if(obj.isNew) {\n      obj.id = uuid.v4();\n      obj.created = cassandra.types.getTimeUuid().now();\n    }\n    obj.accessed = cassandra.types.getTimeUuid().now();\n  },\n  post:function(obj) {\n\n  }\n});\n\ncassandra.sync(UserModel);\n\nmodule.exports = UserModel;\n```\n\nand can be used like this :\n\n```\nvar User = require (\'user.model\');\n\nvar user = new User();\nuser.email = req.bdy.email;\nuser.setup = false;\nuser.insert({})\n.then (function (newUser) {\n  res.json(newUser);\n  next();\n});\n\nvar user = new User();\nuser.find ({ email : req.body.email })\n.then (function (users) {\n    var foundUser = users[0];\n    foundUser.email = newEmail;\n    foundUser.update({ users[0].id })\n    .then(function(updatedUser) {\n      res.json(updatedUser);\n      next();\n    });\n});\n\n```\n',
+20 silly publish   readmeFilename: 'README.md',
+20 silly publish   gitHead: 'f31e8d82e17432fa3c9846d91a1d4fa11b6838d3',
+20 silly publish   _id: 'lussandra-odm@1.7.4',
+20 silly publish   _shasum: 'a35f1da99bc14c522f1aa0bbb4112d56f7f44df5',
+20 silly publish   _from: '.' }
+21 verbose getPublishConfig undefined
+22 silly mapToRegistry name lussandra-odm
+23 silly mapToRegistry using default registry
+24 silly mapToRegistry registry https://registry.npmjs.org/
+25 silly mapToRegistry uri https://registry.npmjs.org/lussandra-odm
+26 verbose publish registryBase https://registry.npmjs.org/
+27 silly publish uploading /Users/jmeyer/.npm/lussandra-odm/1.7.4/package.tgz
+28 verbose request uri https://registry.npmjs.org/lussandra-odm
+29 verbose request sending authorization for write operation
+30 info attempt registry request try #1 at 4:46:13 PM
+31 verbose request using bearer token for auth
+32 verbose request id 0836404ca404a582
+33 http request PUT https://registry.npmjs.org/lussandra-odm
+34 http 403 https://registry.npmjs.org/lussandra-odm
+35 verbose headers { 'content-type': 'application/json',
+35 verbose headers   'cache-control': 'max-age=300',
+35 verbose headers   'content-length': '95',
+35 verbose headers   'accept-ranges': 'bytes',
+35 verbose headers   date: 'Mon, 18 Jul 2016 21:46:15 GMT',
+35 verbose headers   via: '1.1 varnish',
+35 verbose headers   connection: 'keep-alive',
+35 verbose headers   'x-served-by': 'cache-dfw1842-DFW',
+35 verbose headers   'x-cache': 'MISS',
+35 verbose headers   'x-cache-hits': '0',
+35 verbose headers   'x-timer': 'S1468878374.102684,VS0,VE1193',
+35 verbose headers   vary: 'Accept-Encoding' }
+36 verbose request invalidating /Users/jmeyer/.npm/registry.npmjs.org/lussandra-odm on PUT
+37 error publish Failed PUT 403
+38 verbose stack Error: "You cannot publish over the previously published version 1.7.4." : lussandra-odm
+38 verbose stack     at makeError (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:264:12)
+38 verbose stack     at CachingRegistryClient.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:252:14)
+38 verbose stack     at Request._callback (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:172:14)
+38 verbose stack     at Request.self.callback (/usr/local/lib/node_modules/npm/node_modules/request/request.js:199:22)
+38 verbose stack     at emitTwo (events.js:87:13)
+38 verbose stack     at Request.emit (events.js:172:7)
+38 verbose stack     at Request.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1036:10)
+38 verbose stack     at emitOne (events.js:82:20)
+38 verbose stack     at Request.emit (events.js:169:7)
+38 verbose stack     at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:963:12)
+39 verbose statusCode 403
+40 verbose pkgid lussandra-odm
+41 verbose cwd /Users/jmeyer/workspace/lussandra-odm
+42 error Darwin 15.5.0
+43 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "publish"
+44 error node v4.4.1
+45 error npm  v2.14.20
+46 error code E403
+47 error "You cannot publish over the previously published version 1.7.4." : lussandra-odm
+48 error If you need help, you may report this error at:
+48 error     <https://github.com/npm/npm/issues>
+49 verbose exit [ 1, true ]
