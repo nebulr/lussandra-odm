@@ -1,6 +1,6 @@
 {
   "name": "lussandra-odm",
-  "version": "1.7.6",
+  "version": "1.7.7",
   "description": "Object Document Modeling for Lussandra",
   "main": "index.js",
   "scripts": {
