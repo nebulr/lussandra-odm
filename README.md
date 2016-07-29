@@ -111,7 +111,7 @@ user.find ({ email : req.body.email })
 .then (function (users) {
     var foundUser = users[0];
     foundUser.email = newEmail;
-    foundUser.update({ users[0].id })
+    foundUser.update({ id : users[0].id })
     .then(function(updatedUser) {
       res.json(updatedUser);
       next();
