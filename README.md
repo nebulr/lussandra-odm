@@ -61,8 +61,8 @@ var UserModel = cassandra.model ({
     key_type : cassandra.types.INDEX,
     key_order : 2
   },
+  active : { type : cassandra.types.BOOLEAN, default : true },
   password : { type : cassandra.types.TEXT },
-  salt : { type : cassandra.types.TEXT },
   account : { type : cassandra.types.TEXT },
   created : { type : cassandra.types.TIMESTAMP },
   latitude : { type : cassandra.types.FLOAT },
