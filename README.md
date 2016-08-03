@@ -61,8 +61,8 @@ var UserModel = cassandra.model ({
     key_type : cassandra.types.INDEX,
     key_order : 2
   },
+  active : { type : cassandra.types.BOOLEAN, default : true },
   password : { type : cassandra.types.TEXT },
-  salt : { type : cassandra.types.TEXT },
   account : { type : cassandra.types.TEXT },
   created : { type : cassandra.types.TIMESTAMP },
   latitude : { type : cassandra.types.FLOAT },
@@ -111,7 +111,7 @@ user.find ({ email : req.body.email })
 .then (function (users) {
     var foundUser = users[0];
     foundUser.email = newEmail;
-    foundUser.update({ users[0].id })
+    foundUser.update({ id : users[0].id })
     .then(function(updatedUser) {
       res.json(updatedUser);
       next();
