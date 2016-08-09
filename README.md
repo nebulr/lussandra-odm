@@ -9,7 +9,7 @@ Install with `npm install --save lussandra-odm`
 
 Instantiate the cassandra client by calling :
 
-`require ('lussandra-odm').init(config);`
+`require ('lussandra-odm').init(config).then(function () { ... });`
 
 Where your config follows the following format :
 
@@ -32,12 +32,14 @@ var config = {
 
 
 require ('lussandra-odm').init (config).then(function () {
+  // Syncing the models with cassandra will fail if NOT done in this block
   require ('./routes')(api);
 });
 
 //or
 
 require ('lussandra-odm').init (config).then(function () {
+  // Syncing the models with cassandra will fail if NOT done in this block
   var User = require ('user.model'); // Like shown below
 });
 
@@ -70,17 +72,16 @@ var UserModel = cassandra.model ({
   accessed : { type : cassandra.types.TIMESTAMP },
   settings :  { type : cassandra.types.JSONTOTEXT },
   role : { type : cassandra.types.TEXT },
-  subRole : { type : cassandra.types.TEXT },
-  setup : { type : cassandra.types.BOOLEAN },
-  lucene : { type : cassandra.types.TEXT }
+  subrole : { type : cassandra.types.TEXT },
+  setup : { type : cassandra.types.BOOLEAN }
 }, {
   tableName: 'user',
   pre: function(obj) {
     if(obj.isNew) {
-      obj.id = uuid.v4();
-      obj.created = cassandra.types.getTimeUuid().now();
+      obj.id = uuid.v4(); // Not required. Will create a default id uuid if undefined or not added
+      obj.created = new Date();
     }
-    obj.accessed = cassandra.types.getTimeUuid().now();
+    obj.accessed = new Date(); // Will update this timestamp every time the object is modified
   },
   post:function(obj) {
 
