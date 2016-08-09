@@ -1,5 +1,5 @@
-#Object Document Modeling for Lussandra
-###Lucene + Cassandra = Lussandra
+#Object Document Modeling for Cassandra
+###Lucene + Cassandra = Lussandra; This also works with Cassandra ;)
 _____
 ___Take note this module is in Beta. Use at your own risk___
 
