@@ -1,7 +1,7 @@
 {
   "name": "lussandra-odm",
-  "version": "1.8.5",
-  "description": "Object Document Modeling for Lussandra",
+  "version": "1.8.6",
+  "description": "Object Document Modeling for Cassandra",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
